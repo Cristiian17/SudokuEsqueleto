@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:title="¿Como jugar?"
+        android:id="@+id/comoJugar"/>
+    <item android:title="Nueva partida"
+        android:id="@+id/nuevaPartida"/>
+    <item android:title="Seleccionar dificultad"
+        android:id="@+id/dificultad"/>
+</menu>
