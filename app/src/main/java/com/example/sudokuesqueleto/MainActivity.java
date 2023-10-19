@@ -15,6 +15,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, DificultadDialogListener {
 
     private GameBoard board;
