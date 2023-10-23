@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GridLayout layout = findViewById(R.id.mi_grid);
         Button btn;
         int marginInPixels = 16; // Margen para la mayoría de los botones
-        int marginInPixelsFirstRow = 64; // Margen izquierdo mayor para la primera fila
+        int marginInPixelsFirstRow = getResources().getDisplayMetrics().widthPixels / 6;; // Margen izquierdo mayor para la primera fila
 
         for (int i = 1; i < 10; i++) {
             btn = new Button(this);
@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(view.getClass().getSimpleName().equals("Button")){
             Button b = (Button) view;
             board.setInputNumber(Integer.parseInt((String) b.getText()));
+
         }
     }
 
