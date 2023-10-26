@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, DificultadDialogListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, DificultadDialogListener, EndGameListener {
 
     private GameBoard board;
     private int removedNumbers;
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         board = findViewById(R.id.gameBoard);
+        board.setFragmentManager(getSupportFragmentManager());
         removedNumbers = 40;
         selectedDificult = 0;
         sudokuSolved = board.getSudokuResolv();
@@ -39,16 +40,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GridLayout layout = findViewById(R.id.mi_grid);
         Button btn;
         int marginInPixels = 16; // Margen para la mayoría de los botones
+        int marginTopFirstRow = getResources().getDisplayMetrics().widthPixels / 10; //Margen superior para la primera columna
         int marginInPixelsFirstRow = getResources().getDisplayMetrics().widthPixels / 6;; // Margen izquierdo mayor para la primera fila
 
         for (int i = 1; i < 10; i++) {
             btn = new Button(this);
-
             // Configurar márgenes en el botón
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.setMargins(
                     (i == 1 || i == 4 || i == 7) ? marginInPixelsFirstRow : marginInPixels, // Margen izquierdo
-                    marginInPixels, // Margen superior
+                    (i == 1 || i == 2 || i == 3) ? marginTopFirstRow : marginInPixels, // Margen superior
                     marginInPixels, // Margen derecho
                     marginInPixels  // Margen inferior
             );
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //Clase para dar estilo a los botones
             GradientDrawable gradientDrawable = new GradientDrawable();
             //Con esto le pone el borderRadius
-            gradientDrawable.setCornerRadius(30f);
+            gradientDrawable.setCornerRadius(50f);
             gradientDrawable.setColor(Color.parseColor("#1d2323"));
             btn.setBackground(gradientDrawable);
             btn.setTextColor(Color.WHITE);
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dificult = "Dificil";
                 break;
         }
-        Toast.makeText(this, "Nivel de dificultad: " + dificult, Toast.LENGTH_SHORT).show();// in Activity
+        Toast.makeText(this, "Nivel de dificultad: " + dificult, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -136,5 +137,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 board.resetBoard(60);
                 break;
         }
+    }
+
+    @Override
+    public void resset(DialogFragment dialogFragment) {
+        board.resetBoard(removedNumbers);
     }
 }

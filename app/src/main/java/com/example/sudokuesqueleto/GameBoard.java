@@ -9,9 +9,14 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import java.util.List;
 
-public class GameBoard extends View {
+public class GameBoard extends View implements EndGameListener {
     private final int boardColor;
     private int cellSize;
     private int selectedRow = -1;
@@ -30,6 +35,12 @@ public class GameBoard extends View {
     private final Paint inputTextPaint = new Paint();
     private final Paint button = new Paint();
     int[][] sudokuResolv;
+
+    @Override
+    public void resset(DialogFragment dialogFragment) {
+
+    }
+
 
     private interface OnGameOverListener {
         void onGameOver();
@@ -224,13 +235,23 @@ public class GameBoard extends View {
         }
     }
 
+    public void setFragmentManager(FragmentManager fragmentManager) {
+        this.fragmentManager = fragmentManager;
+    }
+
+    FragmentManager fragmentManager;
     private boolean isGameOver() {
         if (isBoardFull()) {
+
             if (isBoardValid()) {
+                EndGameDialog game = new EndGameDialog("Has ganado", "Enhorabuena has completado el tablero");
                 System.out.println("Board is valid");
+                game.show(fragmentManager, "Has ganado!!");
                 return true;
             } else {
+                EndGameDialog game = new EndGameDialog("Has perdido", "Sigue intentandolo has tenido X aciertos");
                 System.out.println("Board is not valid");
+                game.show(fragmentManager, "Has perdido");
                 return false;
             }
 
