@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import java.util.List;
 
-public class GameBoard extends View implements EndGameListener {
+public class GameBoard extends View {
     private final int boardColor;
     private int cellSize;
     private int selectedRow = -1;
@@ -34,12 +34,8 @@ public class GameBoard extends View implements EndGameListener {
     private final Paint textPaint = new Paint();
     private final Paint inputTextPaint = new Paint();
     private final Paint button = new Paint();
-    int[][] sudokuResolv;
-
-    @Override
-    public void resset(DialogFragment dialogFragment) {
-
-    }
+    private int[][] sudokuResolv;
+    private FragmentManager fragmentManager;
 
 
     private interface OnGameOverListener {
@@ -239,7 +235,7 @@ public class GameBoard extends View implements EndGameListener {
         this.fragmentManager = fragmentManager;
     }
 
-    FragmentManager fragmentManager;
+
     private boolean isGameOver() {
         if (isBoardFull()) {
 

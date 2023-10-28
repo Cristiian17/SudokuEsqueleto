@@ -16,20 +16,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, DificultadDialogListener, EndGameListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, DificultadDialogListener {
 
     private GameBoard board;
-    private int removedNumbers;
-    private int selectedDificult;
+
     private int[][] sudokuSolved;
     private ActionBar actionBar;
+    private int facil;
+    private int medio;
+    private int dificil;
+    private int selectedDificult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         board = findViewById(R.id.gameBoard);
         board.setFragmentManager(getSupportFragmentManager());
-        removedNumbers = 40;
+        facil = 1;
+        medio = 50;
+        dificil = 60;
         selectedDificult = 0;
         sudokuSolved = board.getSudokuResolv();
         actionBar = getSupportActionBar();
@@ -86,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dialog1.show(getSupportFragmentManager(),"Dificultad");
                 return true;
             case R.id.nuevaPartida:
-                board.resetBoard(removedNumbers);
+                board.resetBoard(selectedDificult == 0 ? facil : selectedDificult == 1 ? medio : dificil);
                 return true;
         }
         return true;
@@ -123,24 +128,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (dificult){
             case 0:
                 selectedDificult = 0;
-                removedNumbers = 40;
-                board.resetBoard(40);
+                board.resetBoard(facil);
                 break;
             case 1:
                 selectedDificult = 1;
-                removedNumbers = 50;
-                board.resetBoard(50);
+                board.resetBoard(medio);
                 break;
             case 2:
                 selectedDificult = 2;
-                removedNumbers = 60;
-                board.resetBoard(60);
+                board.resetBoard(dificil);
                 break;
         }
-    }
-
-    @Override
-    public void resset(DialogFragment dialogFragment) {
-        board.resetBoard(removedNumbers);
     }
 }
