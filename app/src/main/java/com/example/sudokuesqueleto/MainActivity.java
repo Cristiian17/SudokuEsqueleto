@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         board = findViewById(R.id.gameBoard);
         board.setFragmentManager(getSupportFragmentManager());
-        facil = 1;
+        facil = 40;
         medio = 50;
         dificil = 60;
         selectedDificult = 0;
