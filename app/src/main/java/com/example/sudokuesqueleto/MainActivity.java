@@ -22,9 +22,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private int[][] sudokuSolved;
     private ActionBar actionBar;
-    private int facil;
-    private int medio;
-    private int dificil;
+    private final int FACIL = 40;;
+    private final int MEDIO = 50;;
+    private final int DIFICIL = 60;;
     private int selectedDificult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         board = findViewById(R.id.gameBoard);
         board.setFragmentManager(getSupportFragmentManager());
-        facil = 40;
-        medio = 50;
-        dificil = 60;
         selectedDificult = 0;
         sudokuSolved = board.getSudokuResolv();
         actionBar = getSupportActionBar();
@@ -44,21 +41,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void generarBotones() {
         GridLayout layout = findViewById(R.id.mi_grid);
         Button btn;
-        int marginInPixels = 16; // Margen para la mayoría de los botones
-        int marginTopFirstRow = getResources().getDisplayMetrics().widthPixels / 10; //Margen superior para la primera columna
-        int marginInPixelsFirstRow = getResources().getDisplayMetrics().widthPixels / 6;; // Margen izquierdo mayor para la primera fila
 
         for (int i = 1; i < 10; i++) {
             btn = new Button(this);
             // Configurar márgenes en el botón
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-            params.setMargins(
-                    (i == 1 || i == 4 || i == 7) ? marginInPixelsFirstRow : marginInPixels, // Margen izquierdo
-                    (i == 1 || i == 2 || i == 3) ? marginTopFirstRow : marginInPixels, // Margen superior
-                    marginInPixels, // Margen derecho
-                    marginInPixels  // Margen inferior
-            );
-
+            params.setMargins(10,10, 10,10 );
             btn.setLayoutParams(params);
             btn.setText("" + i);
             btn.setId(View.generateViewId());
@@ -91,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dialog1.show(getSupportFragmentManager(),"Dificultad");
                 return true;
             case R.id.nuevaPartida:
-                board.resetBoard(selectedDificult == 0 ? facil : selectedDificult == 1 ? medio : dificil);
+                board.resetBoard(selectedDificult == 0 ? FACIL : selectedDificult == 1 ? MEDIO : DIFICIL);
                 return true;
         }
         return true;
@@ -128,15 +116,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (dificult){
             case 0:
                 selectedDificult = 0;
-                board.resetBoard(facil);
+                board.resetBoard(FACIL);
                 break;
             case 1:
                 selectedDificult = 1;
-                board.resetBoard(medio);
+                board.resetBoard(MEDIO);
                 break;
             case 2:
                 selectedDificult = 2;
-                board.resetBoard(dificil);
+                board.resetBoard(DIFICIL);
                 break;
         }
     }

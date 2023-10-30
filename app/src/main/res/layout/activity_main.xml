@@ -19,22 +19,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <RelativeLayout
-        android:layout_width="409dp"
-        android:layout_height="318dp"
-        android:layout_marginTop="412dp"
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/mi_grid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:columnCount="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/gameBoard">
+        app:layout_constraintTop_toBottomOf="@+id/gameBoard">
 
-        <androidx.gridlayout.widget.GridLayout
-            android:id="@+id/mi_grid"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:columnCount="3">
-
-        </androidx.gridlayout.widget.GridLayout>
-    </RelativeLayout>
+    </androidx.gridlayout.widget.GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

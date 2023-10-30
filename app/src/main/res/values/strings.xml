@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Sudoku</string>
+    <string name="comoJugar">¿Como jugar?</string>
+    <string name="nuevaPartida">Nueva partida</string>
+    <string name="seleccionarDificultad">Seleccionar dificultad</string>
+
 </resources>

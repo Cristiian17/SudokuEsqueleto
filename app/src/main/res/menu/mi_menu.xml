@@ -3,10 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <item android:title="¿Como jugar?"
-        android:id="@+id/comoJugar"/>
-    <item android:title="Nueva partida"
-        android:id="@+id/nuevaPartida"/>
-    <item android:title="Seleccionar dificultad"
-        android:id="@+id/dificultad"/>
+    <item
+        android:id="@+id/comoJugar"
+        android:title="@string/comoJugar" />
+    <item
+        android:id="@+id/nuevaPartida"
+        android:title="@string/nuevaPartida" />
+    <item
+        android:id="@+id/dificultad"
+        android:title="@string/seleccionarDificultad" />
 </menu>

@@ -9,9 +9,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.List;
@@ -181,11 +178,16 @@ public class GameBoard extends View {
             for (int col = 0; col < 9; col++) {
                 if (editableCells[row][col]) {
                     if (sudokuBoard[row][col] != 0) {
-                        if (checkNumberPlacement(row, col, sudokuBoard[row][col])) {
-                            paint.setColor(Color.parseColor("#FFA500"));
-                        } else {
-                            paint.setColor(Color.RED);
+                        if(selectedRow == row && selectedCol == col){
+                            if (checkNumberPlacement(row, col, sudokuBoard[row][col])) {
+                                paint.setColor(Color.parseColor("#FFA500"));
+                            } else {
+                                paint.setColor(Color.RED);
+                            }
+                        }else{
+                            paint.setColor(Color.parseColor("#6c02b3"));
                         }
+
                         canvas.drawText(Integer.toString(sudokuBoard[row][col]), col * cellSize + cellSize / 2f, row * cellSize + cellSize / 2f + cellSize * 0.2f, paint);
                     }
                 }
@@ -245,7 +247,7 @@ public class GameBoard extends View {
                 game.show(fragmentManager, "Has ganado!!");
                 return true;
             } else {
-                EndGameDialog game = new EndGameDialog("Has perdido", "Sigue intentandolo has tenido X aciertos");
+                EndGameDialog game = new EndGameDialog("Has perdido", "Sigue intentandolo has tenido "+ checkCorrectNumbers() + " aciertos");
                 System.out.println("Board is not valid");
                 game.show(fragmentManager, "Has perdido");
                 return false;
@@ -279,6 +281,16 @@ public class GameBoard extends View {
             }
         }
         return true;
+    }
+
+    private int checkCorrectNumbers() {
+        int aciertos = 0;
+        for (RemovedNumber num : removedNumbers){
+            if (sudokuBoard[num.row][num.col] == num.value && editableCells[num.row][num.col]){
+                aciertos++;
+            }
+        }
+        return aciertos;
     }
 
     private int getCell(int row, int col) {
